@@ -69,7 +69,8 @@ public class PlayerMovement : MonoBehaviour
             yield return null;
         }
 
-        rb.MovePosition(targetPosition);  // Ensure final position is exact
+        rb.MovePosition(targetPosition);
+        dodgeDirection = Vector2.zero;
         isDodging = false;
     }
 }
