@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2024cffe26c5b1e498dc6dbe7ca9b570, type: 3}
+  m_Name: DoorConfig
+  m_EditorClassIdentifier: 
+  doorTiles:
+  - doorOpen: {fileID: 11400000, guid: cdcccdd3e7eda2d438e70e1deaf9da04, type: 2}
+    doorClosed: {fileID: 11400000, guid: 2914b882ded32894399f00215a6a778e, type: 2}
+  - doorOpen: {fileID: 11400000, guid: 4049055e3ef8d4c4c943877cf5e43446, type: 2}
+    doorClosed: {fileID: 11400000, guid: 90a2d389f49902f47bb9d47eae818c40, type: 2}
+  - doorOpen: {fileID: 11400000, guid: 0e77e955f0d219c41b1761249b87978a, type: 2}
+    doorClosed: {fileID: 11400000, guid: 0f30c494cb999074592fb22b93723233, type: 2}
