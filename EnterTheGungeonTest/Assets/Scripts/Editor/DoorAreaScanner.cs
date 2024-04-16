@@ -49,8 +49,6 @@ public class DoorAreaScanner : EditorWindow
 		}
 		if (tilemap != null && doorController != null)
 		{
-
-
 			if (GUILayout.Button("Scan for Doors"))
 			{
 				List<DoorTilePair> foundDoors = ScanForDoors(tilemap, doorConfig.doorTiles);
