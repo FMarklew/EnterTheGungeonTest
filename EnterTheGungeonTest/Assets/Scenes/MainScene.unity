@@ -3644,8 +3644,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aimInputAction: {fileID: 3139245907587772962, guid: 5e1908dd8a89708428b0182a11f99087, type: 3}
-  maxDistanceFromTarget: 2.5
-  smoothTime: 0.3
+  maxDistanceFromTargetY: 4
+  maxDistanceFromTargetX: 2
+  smoothTime: 0.35
 --- !u!1 &570639521
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private InputActionReference aimInputAction;
-    [SerializeField] private float maxDistanceFromTarget;
+    [SerializeField] private float maxDistanceFromTargetY;
+    [SerializeField] private float maxDistanceFromTargetX;
     [SerializeField] private float smoothTime = 0.2f;
 
     private Transform followTarget;
@@ -23,7 +24,7 @@ public class CameraMovement : MonoBehaviour
     {
         Vector2 moveDirection = aimInputAction.action.ReadValue<Vector2>().normalized;
        
-        targetLocation = followTarget.position + new Vector3(moveDirection.x, moveDirection.y, 0) * maxDistanceFromTarget;
+        targetLocation = followTarget.position + new Vector3(moveDirection.x * maxDistanceFromTargetX, moveDirection.y * maxDistanceFromTargetY, 0);
 
         transform.position = Vector3.SmoothDamp(transform.position, new Vector3(targetLocation.x, targetLocation.y, transform.position.z), 
             ref velocity, smoothTime);
