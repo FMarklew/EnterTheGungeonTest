@@ -5,16 +5,19 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+	public string weaponId;
 	[SerializeField] private ProjectileBase projectilePrefab;
-	[SerializeField] private Transform projectileSpawnPoint;
+	public Transform projectileSpawnPoint;
 	[SerializeField] private GameObject gunSpriteParent;
 
 	[Tooltip("Seconds between shots")][SerializeField] private float shotInterval = 0.2f;
 
+	public float projectileVelocity;
 	[Tooltip("Max ammo, set to -1 for infinite ammo")] [SerializeField] private int maxAmmo;
-	private int currentAmmo;
+	public int currentAmmo;
 
-	private List<ProjectileBase> projectilePool = new List<ProjectileBase>();
+	public ProjectileObjectPool projectileObjectPoolHandler = new ProjectileObjectPool();
+	
 
 	private void Start()
 	{
@@ -23,15 +26,13 @@ public class Weapon : MonoBehaviour
 
 	public virtual void Init()
 	{
-		currentAmmo = maxAmmo;
+		RefreshAmmo();
+		projectileObjectPoolHandler.InitializePool(projectilePrefab);
 	}
 
 	public virtual void CleanUp()
 	{
-		foreach(ProjectileBase p in projectilePool)
-		{
-			Destroy(p.gameObject, 1);
-		}
+		projectileObjectPoolHandler.DestroyPool();
 
 		Destroy(this.gameObject, 10);
 	}
@@ -40,26 +41,11 @@ public class Weapon : MonoBehaviour
 	{
 		if (maxAmmo == -1 || currentAmmo > 0)
 		{
-			ProjectileBase projectile = GetProjectileFromPool();
+			ProjectileBase projectile = projectileObjectPoolHandler.GetProjectileFromPool();
 			projectile.Init();
-			projectile.Fire(projectileSpawnPoint.position, direction);
+			projectile.Fire(projectileSpawnPoint.position, direction, projectileVelocity);
 			currentAmmo--;
 		}
-	}
-
-	private ProjectileBase GetProjectileFromPool()
-	{
-		for(int i = 0; i < projectilePool.Count; i++)
-		{
-			if (!projectilePool[i].gameObject.activeInHierarchy)
-			{
-				projectilePool[i].gameObject.SetActive(true);
-				return projectilePool[i];
-			}
-		}
-		ProjectileBase projectile = Instantiate<ProjectileBase>(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
-		projectilePool.Add(projectile);
-		return projectile;
 	}
 
 	public GameObject GetGunSprite()
@@ -75,5 +61,10 @@ public class Weapon : MonoBehaviour
 	public float GetShotInterval()
 	{
 		return shotInterval;
+	}
+
+	public void RefreshAmmo()
+	{
+		currentAmmo = maxAmmo;
 	}
 }

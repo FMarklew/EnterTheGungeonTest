@@ -15,9 +15,9 @@ public class PlayerWeaponPickup : PickupBase
 		return "Player";
 	}
 
-	public override void OnPickup(GameObject other)
+	public override void OnPickupTriggered(GameObject other)
 	{
 		PlayerWeaponHandler.AddWeaponEvent(weapon, true);
-		Destroy(gameObject);
+		Destroy(this.gameObject);
 	}
 }

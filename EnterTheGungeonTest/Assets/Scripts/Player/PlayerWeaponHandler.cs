@@ -19,10 +19,10 @@ public class PlayerWeaponHandler : MonoBehaviour
 	{
 		AddWeaponEvent += AddWeapon;
 
-		// equip first weapon if added to list in editor
+		// equip last weapon if added to list in editor (pistol is the current baseline and should be at index 0)
 		if(currentWeapons.Count > 0)
 		{
-			EquipWeapon(currentWeapons[0]);
+			EquipWeapon(currentWeapons[currentWeapons.Count-1]);
 		}
 	}
 
@@ -42,15 +42,19 @@ public class PlayerWeaponHandler : MonoBehaviour
 
 	public void AddWeapon(Weapon weapon, bool equip)
 	{
-		if (!currentWeapons.Contains(weapon))
+		Weapon knownWeapon = currentWeapons.Find(weap => weap.weaponId.Equals(weapon.weaponId));
+		if (knownWeapon == null)
 		{
-			Weapon weap = Instantiate(weapon, weaponParent);
-			currentWeapons.Add(weap);
-			weap.gameObject.SetActive(false);
+			knownWeapon = Instantiate(weapon, weaponParent);
+			currentWeapons.Add(knownWeapon);
+			knownWeapon.gameObject.SetActive(false);
 			if (equip)
 			{
-				EquipWeapon(weap);
+				EquipWeapon(knownWeapon);
 			}
+		} else
+		{
+			knownWeapon.RefreshAmmo();
 		}
 	}
 
@@ -62,7 +66,7 @@ public class PlayerWeaponHandler : MonoBehaviour
 			weap.gameObject.SetActive(false);
 		}
 		equippedWeapon.gameObject.SetActive(true);
-
+		nextShotTimeAvailable = 0f;
 	}
 
 	private void UnequipWeapon()
@@ -78,7 +82,7 @@ public class PlayerWeaponHandler : MonoBehaviour
 
 	private void TryShooting()
 	{
-		if(equippedWeapon.GetRemainingAmmo() > 0)
+		if(equippedWeapon != null && equippedWeapon.GetRemainingAmmo() > 0)
 		{
 			if(nextShotTimeAvailable <= Time.time)
 			{

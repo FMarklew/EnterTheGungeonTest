@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class PickupBase : MonoBehaviour
 {
 	public abstract void Init();
-	public abstract void OnPickup(GameObject other);
+	public abstract void OnPickupTriggered(GameObject other);
 	public abstract string GetPickupInteractionTag();
 
 	private void Awake()
@@ -17,7 +17,7 @@ public abstract class PickupBase : MonoBehaviour
 	{
 		if (collision.gameObject.CompareTag(GetPickupInteractionTag()))
 		{
-			OnPickup(collision.gameObject);
+			OnPickupTriggered(collision.gameObject);
 		}
 	}
 }
