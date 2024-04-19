@@ -6,9 +6,17 @@ using UnityEngine.InputSystem;
 public class PlayerAiming : MonoBehaviour
 {
 	[SerializeField] private Transform aimObject;
+	[SerializeField] private Transform playerSprite;
 	[SerializeField] private InputActionReference aimInputAction;
 	[SerializeField] private Transform weaponsParent;
 	private bool isFlipped = true;
+
+	private float playerSpriteScale = 1.5f;
+	private void Awake()
+	{
+		playerSpriteScale = playerSprite.localScale.x;
+	}
+
 	void Update()
 	{
 		Vector2 aimDirection = aimInputAction.action.ReadValue<Vector2>().normalized;
@@ -22,7 +30,8 @@ public class PlayerAiming : MonoBehaviour
 				if (isFlipped)
 				{
 					isFlipped = false;
-					weaponsParent.localScale = new Vector3(-1,1,1);
+					weaponsParent.localScale = new Vector3(-1, 1, 1);
+					playerSprite.localScale = new Vector3(playerSpriteScale * - 1, playerSpriteScale, playerSpriteScale);
 				}
 			} else
 			{
@@ -30,6 +39,7 @@ public class PlayerAiming : MonoBehaviour
 				{
 					isFlipped = true;
 					weaponsParent.localScale = new Vector3(1, 1, 1);
+					playerSprite.localScale = new Vector3(playerSpriteScale, playerSpriteScale, playerSpriteScale);
 				}
 			}
 		}

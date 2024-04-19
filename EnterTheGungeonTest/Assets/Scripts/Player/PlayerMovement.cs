@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Rigidbody2D rb;
 
+    [SerializeField] private Animator playerAnim;
+    private const string DODGE_ANIM_CONDITION_NAME = "Dodging";
+
     private bool isDodging = false;
     private Vector2 dodgeDirection = new Vector2();
 
@@ -58,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator DodgeMovement(float distance)
     {
         isDodging = true;
+        playerAnim.SetBool(DODGE_ANIM_CONDITION_NAME, true);
         float elapsedTime = 0;
         Vector2 startPosition = transform.position;
         Vector2 targetPosition = startPosition + dodgeDirection * distance;
@@ -71,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
 
         rb.MovePosition(targetPosition);
         dodgeDirection = Vector2.zero;
+        playerAnim.SetBool(DODGE_ANIM_CONDITION_NAME, false);
         isDodging = false;
     }
 }

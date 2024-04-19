@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3068385689800042435}
   - component: {fileID: 4135155683034843700}
   - component: {fileID: 4209812321794935109}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GunPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1361924700694054964}
   - component: {fileID: 711934321601973652}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
