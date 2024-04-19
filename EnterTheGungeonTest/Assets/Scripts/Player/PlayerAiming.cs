@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// handles player aiming, sprite flipping for character and weapon in-hand
+/// </summary>
 public class PlayerAiming : MonoBehaviour
 {
 	[SerializeField] private Transform aimObject;

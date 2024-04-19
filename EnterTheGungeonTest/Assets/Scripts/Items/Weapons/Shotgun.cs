@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Shotgun which handles shooting over a specified arc
+/// </summary>
 public class Shotgun : Weapon
 {
 	[SerializeField] private float shotArc;
@@ -12,6 +15,7 @@ public class Shotgun : Weapon
 		float halfSpread = shotArc / 2;
 		Quaternion rotation = Quaternion.FromToRotation(Vector2.up, direction.normalized);
 
+		// leverage quaternion math to handle angles
 		for (int i = 0; i < totalShotsOverArc; i++)
 		{
 			float angle = ((float)i / (totalShotsOverArc - 1) * shotArc) - halfSpread;

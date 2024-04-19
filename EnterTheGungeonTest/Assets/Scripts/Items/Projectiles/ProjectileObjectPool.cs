@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// class responsible for object pooling of projectiles to optimally use GameObjects
+/// also handles cleanup for the objects
+/// </summary>
 public class ProjectileObjectPool
 {
 	private List<ProjectileBase> projectilePool = new List<ProjectileBase>();

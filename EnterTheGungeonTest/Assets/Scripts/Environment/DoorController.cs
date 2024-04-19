@@ -2,6 +2,9 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Tilemaps;
 
+/// <summary>
+/// Door Controller script responsible for opening and closing doors when player is near. Can be improved by adding a lock system which waits until enemies are defeated for example.
+/// </summary>
 public class DoorController : MonoBehaviour
 {
 	public Tilemap tilemap;

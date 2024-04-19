@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Base pickup class to be inherited from for items
+/// </summary>
 public abstract class PickupBase : MonoBehaviour
 {
 	public abstract void Init();

@@ -4,24 +4,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// class for handling player movement, including dodge
+/// this can be improved by adding iframes for the dodge once a PlayerHealth system is implemented
+/// </summary>
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private InputActionReference movementInputAction;
+    [SerializeField] private Rigidbody2D rb;
 
+    [Header("Dodging")]
     [SerializeField] private float dodgeSpeed;
     [SerializeField] private float dodgeDistance;
     [SerializeField] private InputActionReference dodgeInputAction;
-
-    [SerializeField] private Rigidbody2D rb;
-
+    
     [SerializeField] private Animator playerAnim;
     private const string DODGE_ANIM_CONDITION_NAME = "Dodging";
+    private const string COLLISION_LAYER_NAME = "CollisionObjects"; // if required this can be changed into a LayerMask serialized reference
 
     private bool isDodging = false;
     private Vector2 dodgeDirection = new Vector2();
 
-    private void Start()
+    private void OnEnable()
     {
         dodgeInputAction.action.performed += Dodge;
     }
@@ -33,7 +39,12 @@ public class PlayerMovement : MonoBehaviour
         rb.MovePosition(transform.position + new Vector3(moveDir.x, moveDir.y, 0));
     }
 
-    void Dodge(InputAction.CallbackContext context)
+	private void OnDisable()
+	{
+        dodgeInputAction.action.performed -= Dodge;
+    }
+
+	void Dodge(InputAction.CallbackContext context)
     {
         if (isDodging) return;
 
@@ -48,9 +59,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // handle dodge use case for rolling into walls
     float CalculateDodgeDistance(Vector2 direction, float maxDistance)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, maxDistance, LayerMask.GetMask("CollisionObjects"));
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, maxDistance, LayerMask.GetMask(COLLISION_LAYER_NAME));
         if (hit.collider != null)
         {
             return hit.distance - 0.05f;

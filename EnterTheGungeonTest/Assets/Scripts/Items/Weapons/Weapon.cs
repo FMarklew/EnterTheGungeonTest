@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// Base class for weapons - comes with firing logic, ammo handling, object pool
+/// </summary>
 public class Weapon : MonoBehaviour
 {
 	public string weaponId;
@@ -32,6 +34,7 @@ public class Weapon : MonoBehaviour
 
 	public virtual void CleanUp()
 	{
+		// on weapon discard
 		projectileObjectPoolHandler.DestroyPool();
 
 		Destroy(this.gameObject, 10);

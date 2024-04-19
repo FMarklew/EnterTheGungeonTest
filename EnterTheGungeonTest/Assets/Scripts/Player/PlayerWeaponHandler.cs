@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// player weapon handler is responsible for adding weapons and handling which weapon is currently equipped
+/// this can be improved by allowing players to switch between available weapons - for now it just "equips" whichever weapon was most recently picked up
+/// </summary>
 public class PlayerWeaponHandler : MonoBehaviour
 {
     [SerializeField] private List<Weapon> currentWeapons = new List<Weapon>();

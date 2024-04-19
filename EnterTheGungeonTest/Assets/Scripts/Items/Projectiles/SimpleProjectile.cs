@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Simplest projectile, just fires forward and disables on trigger enter. 
+/// This can be extended to affect enemies as well
+/// </summary>
 public class SimpleProjectile : ProjectileBase
 {
 	public override void Init()

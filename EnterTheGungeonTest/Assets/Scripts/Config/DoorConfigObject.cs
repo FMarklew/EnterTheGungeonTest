@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEditor;
 
+/// <summary>
+/// Scriptable object responsible for pairing of open and closed door sprites
+/// </summary>
+
 #if UNITY_EDITOR
 [CreateAssetMenu(fileName = "DoorScannerConfig", menuName = "ScriptableObjects/DoorConfigObject", order = 1)]
 public class DoorConfigObject : ScriptableObject

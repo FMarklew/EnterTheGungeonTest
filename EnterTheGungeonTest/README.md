@@ -7,9 +7,10 @@ Unity 2022.3.16
 
 ## Game Notes
 * The focus was game feel - things like shooting and rolling had to feel good for the player. Given the constraint to work with mobile, and in portrait mode - this was an interesting challenge.
+* Approximately 10-15 hours was spent working on the game
 * Weapon and projectile systems can be used together to create any weapon and ammunition type
 * Weapon pickup system is easy to work with
-* There are two editor tools made, both leveraged ChatGPT
+* There are two editor tools made, both leveraged ChatGPT (since it is useful for rapid game tooling)
     * Door Area Scanner - allows doors to be easily created and pathed through via trigger boxes. 
     * Tilemap Collider Editor - The default behaviour for Tilemaps uses mesh colliders, which is less efficient and also unnecessary for this game. The tool adds a normal box collider for each entry in the tilemap
 
